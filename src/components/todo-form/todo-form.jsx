@@ -8,17 +8,20 @@ export const TodoForm = () => {
 
   const handleAddTodo = () => {
     // Fix an ability to add new task
-    const len = todos.length;
-    const lastTodoId = len ? todos[len - 1].id : 0;
-    setTodos((prevTodos) => [
-      ...prevTodos,
-      {
-        id: lastTodoId + 1,
-        label: task,
-        checked: false,
-      },
-    ]);
-    setTask('');
+    const newTask = task.split('').every((char) => char === ' ');
+    if (!newTask) {
+      const len = todos.length;
+      const lastTodoId = len ? todos[len - 1].id : 0;
+      setTodos([
+        ...todos,
+        {
+          id: lastTodoId + 1,
+          label: task,
+          checked: false,
+        },
+      ]);
+      setTask('');
+    }
   };
 
   const handleKeyUp = (e) => {
